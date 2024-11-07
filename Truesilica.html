@@ -1,9 +1,14 @@
+  /* Truesilica Website */
+  /* Author : Ronak Panchal */
+  /* Date : 7th Nov 2024*/
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Truesilica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         /* Basic Reset */
         * {
@@ -16,27 +21,69 @@
             background-color: #f4f4f9;
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         /* Header Styling */
         .header {
-            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 40px;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
             color: #fff;
-            padding: 60px 20px;
-            text-align: center;
-            font-size: 2.5rem;
-            letter-spacing: 3px;
+            background: #ffedcc;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+        .header img {
+            width: 75px;
+            margin-right: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .header img:hover {
+            transform: scale(1.05);
         }
         .header h1 {
-            font-family: 'Georgia', serif;
-            font-size: 3rem;
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #014238;
+        }
+        .contact-button {
+            padding: 10px 20px;
+            background-color: #FF6B00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+        }
+        .contact-button:hover {
+            background-color: #ff8b33;
+            transform: scale(1.05);
         }
         /* Banner Section */
         .banner {
             width: 100%;
-            height: 300px;
+            height: 400px;
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Arduino_ftdi_chip-1.jpg/800px-Arduino_ftdi_chip-1.jpg');
             background-size: cover;
             background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: fadeIn 2s ease-in;
+        }
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         /* Site Description Section */
         .site-description {
@@ -48,27 +95,102 @@
         .site-description h2 {
             font-size: 2rem;
             margin-bottom: 10px;
+            color: #FF6B00;
         }
         .site-description p {
             font-size: 1rem;
             color: #666;
         }
+        
+        /* New Our Services Section Styling */
+        .services {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        .services h2 {
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .service-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        .service-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .service-details {
+            display: none;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .service-card h3 {
+            margin: 15px 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .service-details ul {
+            list-style: disc;
+            padding-left: 20px;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .service-details li {
+            margin-bottom: 10px;
+        }
+
         /* Contact Section Layout */
         .contact-section {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             padding: 40px;
             max-width: 1200px;
             margin: 0 auto;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
         /* Contact Info */
         .contact-info {
-            width: 35%;
+            /* width: 35%; */
             padding: 20px;
+            opacity: 0;
+            animation: slideIn 1s ease-in forwards;
+            animation-delay: 0.5s;
         }
         .contact-info h2 {
             font-size: 2rem;
             margin-bottom: 20px;
+            color: #333;
         }
         .contact-info p {
             font-size: 1rem;
@@ -84,13 +206,33 @@
             width: 24px;
             margin-right: 10px;
         }
+        /* Social Media Icons */
+        .social-icons {
+            display: flex;
+            justify-content: start;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .social-icons a {
+            color: #333;
+            font-size: 24px;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icons a:hover {
+            transform: scale(1.1);
+            color: #FF6B00;
+        }
         /* Contact Form */
         .contact-form-container {
-            width: 55%;
+            /* width: 55%; */
             background: #fff;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: slideIn 1s ease-in forwards;
+            animation-delay: 0.5s;
         }
         .contact-form-container h3 {
             font-size: 1.8rem;
@@ -121,6 +263,11 @@
         .contact-form button:hover {
             background: #ff8b33;
         }
+        /* Slide In Animation */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
         /* Map Section */
         .map-section {
             margin: 40px auto;
@@ -143,15 +290,20 @@
             font-size: 0.9rem;
         }
     </style>
+    <!-- Font Awesome for Social Media Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Maps API -->
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnNX2EcMCGzVWfwTGKUy3g79DZHIw_2QM&callback=console.debug&libraries=maps,marker&v=beta">
-    </script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnNX2EcMCGzVWfwTGKUy3g79DZHIw_2QM&callback=console.debug&libraries=maps,marker&v=beta"></script>
 </head>
 <body>
 
     <!-- Header Section -->
     <div class="header">
-        <h1>Truesilica</h1>
+        <div class="header-left">
+            <img src="https://raw.githubusercontent.com/Truesilica/truesilica.com/refs/heads/main/LOGO_1.webp" alt="Truesilica Logo">
+            <h1>Truesilica</h1>
+        </div>
+        <a href="#contact" class="contact-button">Contact Us</a>
     </div>
 
     <!-- Banner Section -->
@@ -163,28 +315,82 @@
         <p>Truesilica specializes in electronics and embedded systems, providing innovative solutions for IT and technology challenges. Our team is dedicated to delivering top-notch consulting services in electronics, embedded systems, design, R&D, and prototype development.</p>
     </div>
 
+        <!-- New Services Section -->
+        <section class="services" id="services">
+            <h2>Our Services</h2>
+            <div class="services-container">
+                <!-- IT Services Card -->
+                <div class="service-card" onclick="toggleDetails('it-services-details')">
+                    <img src="https://www.completechaintech.com/sites/default/files/2022-02/how_to_choose_the_best_it_service_provider.jpg?text=IT+Services" alt="IT Services" class="service-image">
+                    <h3>IT Services</h3>
+                    <div class="service-details" id="it-services-details">
+                        <ul>
+                            <li>Mobile App Development (iPhone, Android, Flutter, React Native)</li>
+                            <li>Web App Development (Angular, React JS, MEAN, Node)</li>
+                            <li>Cloud Apps, Microservices & API</li>
+                            <li>DevOps Consulting Services</li>
+                            <li>eCommerce Development (WooCommerce, Magento, Big Commerce, Shopify)</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <!-- Embedded and IoT Services Card -->
+                <div class="service-card" onclick="toggleDetails('embedded-services-details')">
+                    <img src="https://robogenesis.in/wp-content/uploads/2024/03/embedded-system-micro-1.jpg?text=Embedded+and+IoT" alt="Embedded and IoT" class="service-image">
+                    <h3>Embedded and IoT</h3>
+                    <div class="service-details" id="embedded-services-details">
+                        <ul>
+                            <li>Hardware Design and Development</li>
+                            <li>Hardware Fabrication and Assembly</li>
+                            <li>Firmware Development</li>
+                            <li>Embedded/IoT Product Development</li>
+                            <li>Smart Home / Garden / Agricultural Product Development</li>
+                            <li>Hardware Integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- JavaScript for Service Details Toggle -->
+        <script>
+            function toggleDetails(id) {
+                const details = document.getElementById(id);
+                details.style.display = details.style.display === "block" ? "none" : "block";
+            }
+        </script>
+
     <!-- Contact Section -->
-    <div class="contact-section">
+    <div class="contact-section col-12" id="contact">
         <!-- Contact Information -->
-        <div class="contact-info">
+        <div class="contact-info col-md-6 col-12">
             <h2>Let's Connect!</h2>
             <p>Your thoughts, questions, and feedback are valuable to us. Reach out using the form or other methods below.</p>
             <div class="contact-info-item">
                 <img src="https://img.icons8.com/ios-filled/50/000000/email.png" alt="email icon">
-                <span>truesilica@gmail.com</span>
+                <a href="mailto:truesilica@gmail.com"><span>truesilica@gmail.com</span></a>
             </div>
             <div class="contact-info-item">
                 <img src="https://img.icons8.com/ios-filled/50/000000/phone.png" alt="phone icon">
-                <span>+91 97140 09660</span>
+                <a href="callto:+919714009660"><span>+91 97140 09660</span></a>
             </div>
             <div class="contact-info-item">
                 <img src="https://img.icons8.com/ios-filled/50/000000/marker.png" alt="location icon">
                 <span>Ahmedabad, Gujarat</span>
             </div>
+            <!-- Social Media Icons -->
+            <div class="social-icons">
+                <a href="https://linkedin.com/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://skype.com/" target="_blank" title="Skype"><i class="fab fa-skype"></i></a>
+                <a href="https://wa.me/919714009660" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://instagram.com/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
         </div>
 
         <!-- Contact Form -->
-        <div class="contact-form-container">
+        <div class="contact-form-container col-md-6 col-12">
             <h3>Contact Us</h3>
             <form action="https://formspree.io/f/xzzbrejz" method="POST" class="contact-form">
                 <label for="name">Your Name</label>
@@ -216,6 +422,7 @@
     <div class="footer">
         &copy; 2024 Truesilica. All rights reserved.
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
